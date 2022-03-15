@@ -15,7 +15,7 @@ const ruleTester = new RuleTester({
 ruleTester.run("validated-non-primitive-property-needs-type-decorator", rule, {
     valid: [
         {
-            // is a primitive type array - doesn't need type (from https://github.com/darraghoriordan/eslint-plugin-nestjs-typed/issues/22)
+            // is a primitive type array - doesn't need type (from https://github.com/NarHakobyan/eslint-plugin-nestjs/issues/22)
             code: `
             class ExampleDto {
                 @ApiProperty({
@@ -27,7 +27,7 @@ ruleTester.run("validated-non-primitive-property-needs-type-decorator", rule, {
     `,
         },
         {
-            // is an OPTIONAL primitive type array - doesn't need type (from https://github.com/darraghoriordan/eslint-plugin-nestjs-typed/issues/22)
+            // is an OPTIONAL primitive type array - doesn't need type (from https://github.com/NarHakobyan/eslint-plugin-nestjs/issues/22)
             code: `
             class ExampleDto {
                 @ApiPropertyOptional({
@@ -39,7 +39,7 @@ ruleTester.run("validated-non-primitive-property-needs-type-decorator", rule, {
     `,
         },
         {
-            // scenario from https://github.com/darraghoriordan/eslint-plugin-nestjs-typed/issues/21
+            // scenario from https://github.com/NarHakobyan/eslint-plugin-nestjs/issues/21
             code: `
             class ExampleDto {
                 @ApiProperty({ isArray: true })
