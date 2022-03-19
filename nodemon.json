@@ -3,4 +3,5 @@
   "ext": "ts",
   "ignore": ["src/**/*.spec.ts", "dist/**/*", "node_modules/**/*"],
   "exec": "npm run build"
+
 }
