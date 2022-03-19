@@ -1,6 +1,6 @@
 {
     "name": "@awesome-nestjs-boilerplate/eslint-plugin-nestjs",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Eslint rules for nestjs projects",
     "scripts": {
         "clean": "rm -Rf ./dist/",
@@ -14,8 +14,6 @@
         "release": "npx semantic-release",
         "semantic-release": "semantic-release"
     },
-
-
     "release": {
         "branches": [
             "main"
