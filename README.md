@@ -71,7 +71,7 @@ https://github.com/typestack/class-validator/issues/438
 ## To install
 
 ```
-npm install --save-dev @awesome-nestjs-boilerplate/eslint-plugin-nestjs
+npm install --save-dev @moneteam/eslint-plugin-nestjs
 ```
 
 Then update your eslint with the plugin import and add the recommended rule set
@@ -81,14 +81,14 @@ module.exports = {
     env: {
         es6: true,
     },
-    extends: ["plugin:@awesome-nestjs-boilerplate/nestjs/recommended"],
+    extends: ["plugin:@moneteam/nestjs/recommended"],
     parser: "@typescript-eslint/parser",
     parserOptions: {
         project: ["./tsconfig.json"],
         sourceType: "module",
         ecmaVersion: "es2019",
     },
-    plugins: ["@awesome-nestjs-boilerplate/nestjs"],
+    plugins: ["@moneteam/nestjs"],
 };
 ```
 
@@ -98,8 +98,8 @@ Note: You can easily turn off all the swagger rules if you don't use swagger by 
 
 ```ts
 // all the other config
-    extends: ["plugin:@awesome-nestjs-boilerplate/nestjs/recommended",
-    "plugin:@awesome-nestjs-boilerplate/nestjs/no-swagger"
+    extends: ["plugin:@moneteam/nestjs/recommended",
+    "plugin:@moneteam/nestjs/no-swagger"
     ],
     // more config
 ```
@@ -108,7 +108,7 @@ Disable a single rule with the full name e.g. in your eslint configuration...
 
 ```
    rules: {
-   "@awesome-nestjs-boilerplate/nestjs/api-property-returning-array-should-set-array":
+   "@moneteam/nestjs/api-property-returning-array-should-set-array":
             "off",
    }
 ```
@@ -440,7 +440,7 @@ Fails if a thing marked as `@Injectable` is not in the `providers` of a module o
 There is some additional configuration you can provide for this rule. This is the default setting. You should overrride this with your src directory and any strings to filter out from paths (note that the filterFromPaths are NOT globs - just matched strings).
 
 ```ts
-    "@awesome-nestjs-boilerplate/nestjs/injectable-should-be-provided": [
+    "@moneteam/nestjs/injectable-should-be-provided": [
             "error",
             {
                 src: ["src/**/*.ts"],

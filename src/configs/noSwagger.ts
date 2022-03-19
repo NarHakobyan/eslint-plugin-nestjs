@@ -3,15 +3,15 @@ export = {
   parser: '@typescript-eslint/parser',
   parserOptions: { sourceType: 'module' },
   rules: {
-    '@awesome-nestjs-boilerplate/nestjs/api-property-matches-property-optionality':
+    '@moneteam/nestjs/api-property-matches-property-optionality':
       'off',
-    '@awesome-nestjs-boilerplate/nestjs/api-method-should-specify-api-response':
+    '@moneteam/nestjs/api-method-should-specify-api-response':
       'off',
-    '@awesome-nestjs-boilerplate/nestjs/controllers-should-supply-api-tags':
+    '@moneteam/nestjs/controllers-should-supply-api-tags':
       'off',
-    '@awesome-nestjs-boilerplate/nestjs/api-enum-property-best-practices':
+    '@moneteam/nestjs/api-enum-property-best-practices':
       'off',
-    '@awesome-nestjs-boilerplate/nestjs/api-property-returning-array-should-set-array':
+    '@moneteam/nestjs/api-property-returning-array-should-set-array':
       'off',
   },
 };
