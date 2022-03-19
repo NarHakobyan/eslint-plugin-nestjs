@@ -1,21 +1,22 @@
-import {RuleTester} from "@typescript-eslint/experimental-utils/dist/eslint-utils";
-import {getFixturesRootDirectory} from "../../testing/fixtureSetup";
-import rule from "./ProviderInjectedShouldMatchFactory";
+import { RuleTester } from '@typescript-eslint/utils/dist/eslint-utils';
+
+import { getFixturesRootDirectory } from '../../testing/fixtureSetup';
+import rule from './ProviderInjectedShouldMatchFactory';
 
 const tsRootDirectory = getFixturesRootDirectory();
 const ruleTester = new RuleTester({
-    parser: "@typescript-eslint/parser",
-    parserOptions: {
-        ecmaVersion: 2015,
-        tsconfigRootDir: tsRootDirectory,
-        project: "./tsconfig.json",
-    },
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2015,
+    tsconfigRootDir: tsRootDirectory,
+    project: './tsconfig.json',
+  },
 });
 
-ruleTester.run("provided-injected-should-match-factory-parameters", rule, {
-    valid: [
-        {
-            code: `export const MyOtherInjectableProvider: Provider = {
+ruleTester.run('provided-injected-should-match-factory-parameters', rule, {
+  valid: [
+    {
+      code: `export const MyOtherInjectableProvider: Provider = {
                 provide: MyOtherInjectable,
                 useFactory: async (
                     config: MyService
@@ -24,9 +25,9 @@ ruleTester.run("provided-injected-should-match-factory-parameters", rule, {
                 },
                 inject: [MyService],
             };`,
-        },
-        {
-            code: `export const MyOtherInjectableProvider: NotAProvider = {
+    },
+    {
+      code: `export const MyOtherInjectableProvider: NotAProvider = {
                 provide: MyOtherInjectable,
                 useFactory: async (
                     config: MyService
@@ -35,9 +36,9 @@ ruleTester.run("provided-injected-should-match-factory-parameters", rule, {
                 },
                 inject: [MyService],
             };`,
-        },
-        {
-            code: `export const MyOtherInjectableProvider: Provider = {
+    },
+    {
+      code: `export const MyOtherInjectableProvider: Provider = {
                 provide: MyOtherInjectable,
                 useFactory: async (
                 ): Promise<MyOtherInjectable> => {
@@ -45,20 +46,20 @@ ruleTester.run("provided-injected-should-match-factory-parameters", rule, {
                 },
                 inject: [],
             };`,
-        },
-        {
-            code: `export const MyOtherInjectableProvider: Provider = {
+    },
+    {
+      code: `export const MyOtherInjectableProvider: Provider = {
             provide: MyOtherInjectable,
             useFactory: async (
             ): Promise<MyOtherInjectable> => {
                 return new MyOtherInjectable()
             }
         };`,
-        },
-    ],
-    invalid: [
-        {
-            code: `export const MyOtherInjectableProvider: Provider = {
+    },
+  ],
+  invalid: [
+    {
+      code: `export const MyOtherInjectableProvider: Provider = {
                 provide: MyOtherInjectable,
                 useFactory: async (
                     config: MyService
@@ -67,14 +68,14 @@ ruleTester.run("provided-injected-should-match-factory-parameters", rule, {
                 },
                 inject: [MyService,SecondService],
             };`,
-            errors: [
-                {
-                    messageId: "mainMessage",
-                },
-            ],
-        },
+      errors: [
         {
-            code: `export const MyOtherInjectableProvider: Provider = {
+          messageId: 'mainMessage',
+        },
+      ],
+    },
+    {
+      code: `export const MyOtherInjectableProvider: Provider = {
                 provide: MyOtherInjectable,
                 useFactory: async (
                     config: MyService,
@@ -84,11 +85,11 @@ ruleTester.run("provided-injected-should-match-factory-parameters", rule, {
                 },
                 inject: [MyService],
             };`,
-            errors: [
-                {
-                    messageId: "mainMessage",
-                },
-            ],
+      errors: [
+        {
+          messageId: 'mainMessage',
         },
-    ],
+      ],
+    },
+  ],
 });

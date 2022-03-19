@@ -1,35 +1,32 @@
-/* eslint-disable unicorn/prevent-abbreviations */
+import { RuleTester } from '@typescript-eslint/utils/dist/eslint-utils';
 
-import {pathPartTestCases, responseParsingTestCases} from "./rule.testData";
-import {typedTokenHelpers} from "../../utils/typedTokenHelpers";
+import { getFixturesRootDirectory } from '../../testing/fixtureSetup';
 import {
-    fakeContext,
-    fakeFilePath,
-} from "../../utils/nestModules/nestProvidedInjectableMapper.testData";
-
+  fakeContext,
+  fakeFilePath,
+} from '../../utils/nestModules/nestProvidedInjectableMapper.testData';
+import { typedTokenHelpers } from '../../utils/typedTokenHelpers';
 import rule, {
-    isParameterNameIncludedInAPathPart,
-    parsePathParts,
-} from "./paramDecoratorNameMatchesRouteParam";
-
-import {RuleTester} from "@typescript-eslint/experimental-utils/dist/eslint-utils";
-import {getFixturesRootDirectory} from "../../testing/fixtureSetup";
+  isParameterNameIncludedInAPathPart,
+  parsePathParts,
+} from './paramDecoratorNameMatchesRouteParam';
+import { pathPartTestCases, responseParsingTestCases } from './rule.testData';
 
 const tsRootDirectory = getFixturesRootDirectory();
 const ruleTester = new RuleTester({
-    parser: "@typescript-eslint/parser",
-    parserOptions: {
-        ecmaVersion: 2015,
-        tsconfigRootDir: tsRootDirectory,
-        project: "./tsconfig.json",
-    },
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2015,
+    tsconfigRootDir: tsRootDirectory,
+    project: './tsconfig.json',
+  },
 });
 
-ruleTester.run("param-decorator-name-matches-route-param", rule, {
-    valid: [
-        {
-            //no param name provided - can't check anything
-            code: `
+ruleTester.run('param-decorator-name-matches-route-param', rule, {
+  valid: [
+    {
+      //no param name provided - can't check anything
+      code: `
             @ApiTags("Custom Bot")
             @ApiBearerAuth()
             @UseGuards(DefaultAuthGuard)
@@ -49,10 +46,10 @@ ruleTester.run("param-decorator-name-matches-route-param", rule, {
             
             }
             `,
-        },
-        {
-            //mixed quotes shouldn't matter
-            code: `
+    },
+    {
+      //mixed quotes shouldn't matter
+      code: `
             @ApiTags("Custom Bot")
             @ApiBearerAuth()
             @UseGuards(DefaultAuthGuard)
@@ -72,10 +69,10 @@ ruleTester.run("param-decorator-name-matches-route-param", rule, {
             
             }
             `,
-        },
-        {
-            // single quotes shouldn't matter
-            code: `
+    },
+    {
+      // single quotes shouldn't matter
+      code: `
             @ApiTags("Custom Bot")
             @ApiBearerAuth()
             @UseGuards(DefaultAuthGuard)
@@ -95,9 +92,9 @@ ruleTester.run("param-decorator-name-matches-route-param", rule, {
             
             }
             `,
-        },
-        {
-            code: `
+    },
+    {
+      code: `
             @ApiTags("Custom Bot")
             @ApiBearerAuth()
             @UseGuards(DefaultAuthGuard)
@@ -116,10 +113,10 @@ ruleTester.run("param-decorator-name-matches-route-param", rule, {
                 }
             }
             `,
-        },
-        {
-            // mix quote support test
-            code: `
+    },
+    {
+      // mix quote support test
+      code: `
             @ApiTags("Custom Bot")
             @ApiBearerAuth()
             @UseGuards(DefaultAuthGuard)
@@ -138,9 +135,9 @@ ruleTester.run("param-decorator-name-matches-route-param", rule, {
                 }
             }
             `,
-        },
-        {
-            code: `
+    },
+    {
+      code: `
             @ApiTags("Custom Bot")
             @ApiBearerAuth()
             @UseGuards(DefaultAuthGuard)
@@ -159,10 +156,10 @@ ruleTester.run("param-decorator-name-matches-route-param", rule, {
                 }
             }
             `,
-        },
-        {
-            // mix quote support test
-            code: `
+    },
+    {
+      // mix quote support test
+      code: `
             @ApiTags("Custom Bot")
             @ApiBearerAuth()
             @UseGuards(DefaultAuthGuard)
@@ -181,10 +178,10 @@ ruleTester.run("param-decorator-name-matches-route-param", rule, {
                 }
             }
             `,
-        },
-        {
-            // question mark in route means path is ignored by rule
-            code: `
+    },
+    {
+      // question mark in route means path is ignored by rule
+      code: `
             @ApiTags("Custom Bot")
             @ApiBearerAuth()
             @UseGuards(DefaultAuthGuard)
@@ -203,10 +200,10 @@ ruleTester.run("param-decorator-name-matches-route-param", rule, {
                 }
             }
             `,
-        },
-        {
-            // asterix in route means path is ignored by rule
-            code: `
+    },
+    {
+      // asterix in route means path is ignored by rule
+      code: `
             @ApiTags("Custom Bot")
             @ApiBearerAuth()
             @UseGuards(DefaultAuthGuard)
@@ -225,11 +222,11 @@ ruleTester.run("param-decorator-name-matches-route-param", rule, {
                 }
             }
             `,
-        },
-    ],
-    invalid: [
-        {
-            code: `
+    },
+  ],
+  invalid: [
+    {
+      code: `
             @ApiTags("Custom Bot")
             @ApiBearerAuth()
             @UseGuards(DefaultAuthGuard)
@@ -248,14 +245,14 @@ ruleTester.run("param-decorator-name-matches-route-param", rule, {
                 }
             }
             `,
-            errors: [
-                {
-                    messageId: "paramIdentifierDoesntNeedColon",
-                },
-            ],
-        },
+      errors: [
         {
-            code: `
+          messageId: 'paramIdentifierDoesntNeedColon',
+        },
+      ],
+    },
+    {
+      code: `
             @ApiTags("Custom Bot")
             @ApiBearerAuth()
             @UseGuards(DefaultAuthGuard)
@@ -274,14 +271,14 @@ ruleTester.run("param-decorator-name-matches-route-param", rule, {
                 }
             }
             `,
-            errors: [
-                {
-                    messageId: "paramIdentifierShouldMatch",
-                },
-            ],
-        },
+      errors: [
         {
-            code: `
+          messageId: 'paramIdentifierShouldMatch',
+        },
+      ],
+    },
+    {
+      code: `
             @ApiTags("Custom Bot")
             @ApiBearerAuth()
             @UseGuards(DefaultAuthGuard)
@@ -300,14 +297,14 @@ ruleTester.run("param-decorator-name-matches-route-param", rule, {
                 }
             }
             `,
-            errors: [
-                {
-                    messageId: "paramIdentifierShouldMatch",
-                },
-            ],
-        },
+      errors: [
         {
-            code: `
+          messageId: 'paramIdentifierShouldMatch',
+        },
+      ],
+    },
+    {
+      code: `
             @ApiTags("Custom Bot")
             @ApiBearerAuth()
             @UseGuards(DefaultAuthGuard)
@@ -326,50 +323,50 @@ ruleTester.run("param-decorator-name-matches-route-param", rule, {
                 }
             }
             `,
-            errors: [
-                {
-                    messageId: "paramIdentifierShouldMatch",
-                },
-            ],
+      errors: [
+        {
+          messageId: 'paramIdentifierShouldMatch',
         },
-    ],
+      ],
+    },
+  ],
 });
 
-describe("paramDecoratorParsePaths", () => {
-    test.each(pathPartTestCases)(
-        "is an expected response for %#",
-        (testCase: {moduleCode: string; paths: string[]; message: string}) => {
-            const ast = typedTokenHelpers.parseStringToAst(
-                testCase.moduleCode,
-                fakeFilePath,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-                fakeContext
-            );
+describe('paramDecoratorParsePaths', () => {
+  test.each(pathPartTestCases)(
+    'is an expected response for %#',
+    (testCase: { moduleCode: string; paths: string[]; message: string }) => {
+      const ast = typedTokenHelpers.parseStringToAst(
+        testCase.moduleCode,
+        fakeFilePath,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        fakeContext,
+      );
 
-            const foundParts = parsePathParts(
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-explicit-any
-                (ast as any).body[0].decorators[0]
-            );
+      const foundParts = parsePathParts(
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-explicit-any
+        (ast as any).body[0].decorators[0],
+      );
 
-            expect(foundParts).toEqual(testCase.paths);
-        }
-    );
+      expect(foundParts).toEqual(testCase.paths);
+    },
+  );
 });
 
-describe("canMapToResponse", () => {
-    test.each(responseParsingTestCases)(
-        "is an expected response for %#",
-        (testCase: {
-            pathToCheck: string;
-            paths: string[];
-            shouldResult: boolean;
-        }) => {
-            const hasFoundParts = isParameterNameIncludedInAPathPart(
-                testCase.pathToCheck,
-                testCase.paths
-            );
+describe('canMapToResponse', () => {
+  test.each(responseParsingTestCases)(
+    'is an expected response for %#',
+    (testCase: {
+      pathToCheck: string;
+      paths: string[];
+      shouldResult: boolean;
+    }) => {
+      const hasFoundParts = isParameterNameIncludedInAPathPart(
+        testCase.pathToCheck,
+        testCase.paths,
+      );
 
-            expect(hasFoundParts).toEqual(testCase.shouldResult);
-        }
-    );
+      expect(hasFoundParts).toEqual(testCase.shouldResult);
+    },
+  );
 });

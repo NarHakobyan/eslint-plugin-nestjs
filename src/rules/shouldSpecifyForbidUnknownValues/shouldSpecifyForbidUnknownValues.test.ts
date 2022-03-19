@@ -1,21 +1,22 @@
-import {RuleTester} from "@typescript-eslint/experimental-utils/dist/eslint-utils";
-import {getFixturesRootDirectory} from "../../testing/fixtureSetup";
-import rule from "./shouldSpecifyForbidUnknownValuesRule";
+import { RuleTester } from '@typescript-eslint/utils/dist/eslint-utils';
+
+import { getFixturesRootDirectory } from '../../testing/fixtureSetup';
+import rule from './shouldSpecifyForbidUnknownValuesRule';
 
 const tsRootDirectory = getFixturesRootDirectory();
 const ruleTester = new RuleTester({
-    parser: "@typescript-eslint/parser",
-    parserOptions: {
-        ecmaVersion: 2015,
-        tsconfigRootDir: tsRootDirectory,
-        project: "./tsconfig.json",
-    },
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2015,
+    tsconfigRootDir: tsRootDirectory,
+    project: './tsconfig.json',
+  },
 });
 
-ruleTester.run("validation-pipe-should-use-forbid-unknown", rule, {
-    valid: [
-        {
-            code: `
+ruleTester.run('validation-pipe-should-use-forbid-unknown', rule, {
+  valid: [
+    {
+      code: `
             const options = {
                 forbidNonWhitelisted: true,
                 forbidUnknownValues: true,
@@ -31,9 +32,9 @@ ruleTester.run("validation-pipe-should-use-forbid-unknown", rule, {
                 forbidUnknownValues: true,
             });   
     `,
-        },
-        {
-            code: `
+    },
+    {
+      code: `
             const options = {
                 forbidNonWhitelisted: true,
             } as ThisIsNotAValidationPipeOptionsClass;
@@ -48,9 +49,9 @@ ruleTester.run("validation-pipe-should-use-forbid-unknown", rule, {
                 forbidUnknownValues: true,
             });   
     `,
-        },
-        {
-            code: `
+    },
+    {
+      code: `
             const options = {
                 forbidNonWhitelisted: true,
                 forbidUnknownValues: true,
@@ -65,9 +66,9 @@ ruleTester.run("validation-pipe-should-use-forbid-unknown", rule, {
                 forbidNonWhitelisted: true
             });   
     `,
-        },
-        {
-            code: `
+    },
+    {
+      code: `
             const options = {
                 forbidNonWhitelisted: true,
                 forbidUnknownValues: true,
@@ -77,11 +78,11 @@ ruleTester.run("validation-pipe-should-use-forbid-unknown", rule, {
     
             const validationPipeB = new ValidationPipe();   
     `,
-        },
-    ],
-    invalid: [
-        {
-            code: `
+    },
+  ],
+  invalid: [
+    {
+      code: `
             const options = {
                 forbidNonWhitelisted: true,
             } as ValidationPipeOptions;
@@ -96,14 +97,14 @@ ruleTester.run("validation-pipe-should-use-forbid-unknown", rule, {
                 forbidUnknownValues: true,
             });   
     `,
-            errors: [
-                {
-                    messageId: "shouldSpecifyForbidUnknownValues",
-                },
-            ],
-        },
+      errors: [
         {
-            code: `
+          messageId: 'shouldSpecifyForbidUnknownValues',
+        },
+      ],
+    },
+    {
+      code: `
             const options = {
                 forbidNonWhitelisted: true,
                 forbidUnknownValues: true,
@@ -118,14 +119,14 @@ ruleTester.run("validation-pipe-should-use-forbid-unknown", rule, {
                 forbidNonWhitelisted: true
             });   
     `,
-            errors: [
-                {
-                    messageId: "shouldSpecifyForbidUnknownValues",
-                },
-            ],
-        },
+      errors: [
         {
-            code: `
+          messageId: 'shouldSpecifyForbidUnknownValues',
+        },
+      ],
+    },
+    {
+      code: `
             const options = {
                 forbidNonWhitelisted: true,
                 forbidUnknownValues: true,
@@ -135,11 +136,11 @@ ruleTester.run("validation-pipe-should-use-forbid-unknown", rule, {
     
             const validationPipeB = new ValidationPipe({});   
     `,
-            errors: [
-                {
-                    messageId: "shouldSpecifyForbidUnknownValues",
-                },
-            ],
+      errors: [
+        {
+          messageId: 'shouldSpecifyForbidUnknownValues',
         },
-    ],
+      ],
+    },
+  ],
 });
