@@ -1,6 +1,3 @@
-// Import { getParserServices } from "@typescript-eslint/experimental-utils/dist/eslint-utils";
-// import * as tsutils from "tsutils";
-// import { getParserServices } from "@typescript-eslint/experimental-utils/dist/eslint-utils";
 import type { TSESTree } from '@typescript-eslint/types';
 
 import { createRule } from '../../utils/createRule';
