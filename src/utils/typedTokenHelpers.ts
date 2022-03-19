@@ -1,13 +1,10 @@
-import {
-    AST_NODE_TYPES,
-    ParserServices,
-    TSESTree,
-} from "@typescript-eslint/experimental-utils";
-import {RuleContext} from "@typescript-eslint/experimental-utils/dist/ts-eslint";
-import {parse} from "@typescript-eslint/parser";
-import ts from "typescript";
-import {unionTypeParts} from "tsutils";
-import * as tsutils from "tsutils";
+import { AST_NODE_TYPES, ParserServices, TSESTree } from '@typescript-eslint/experimental-utils';
+import { RuleContext } from '@typescript-eslint/utils/dist/ts-eslint';
+import { parse } from '@typescript-eslint/parser';
+import ts from 'typescript';
+import * as tsutils from 'tsutils';
+import { unionTypeParts } from 'tsutils';
+
 export const typedTokenHelpers = {
     decoratorsThatCouldMeanTheDevIsValidatingAnArray: [
         "IsArray",
@@ -161,8 +158,6 @@ export const typedTokenHelpers = {
                 (t) => t.type === AST_NODE_TYPES.TSUndefinedKeyword
             ) !== undefined;
 
-        const isOptionalPropertyValue =
-            node.optional || isUndefinedType || false;
-        return isOptionalPropertyValue;
+        return node.optional || isUndefinedType || false;
     },
 };

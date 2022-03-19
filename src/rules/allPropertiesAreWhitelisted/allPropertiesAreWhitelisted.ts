@@ -1,5 +1,5 @@
 import { AST_NODE_TYPES } from '@typescript-eslint/experimental-utils';
-import type { PropertyDefinition } from '@typescript-eslint/types/dist/ast-spec';
+import type { PropertyDefinition } from '@typescript-eslint/types/dist/generated/ast-spec';
 import classValidator from 'class-validator';
 
 import { createRule } from '../../utils/createRule';

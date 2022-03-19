@@ -1,5 +1,5 @@
-import { getParserServices } from '@typescript-eslint/experimental-utils/dist/eslint-utils';
 import type { TSESTree } from '@typescript-eslint/types';
+import { getParserServices } from '@typescript-eslint/utils/dist/eslint-utils';
 
 import { createRule } from '../../utils/createRule';
 import { typedTokenHelpers } from '../../utils/typedTokenHelpers';
@@ -149,4 +149,3 @@ export const apiEnumPropertyBestPractices = createRule({
     };
   },
 });
-

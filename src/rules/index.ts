@@ -1,10 +1,10 @@
 import injectableShouldBeProvided from "./injectablesShouldBeProvided/injectableShouldBeProvided";
 import providedInjectedShouldMatchFactoryParameters from "./providerInjectedShouldMatchFactory/ProviderInjectedShouldMatchFactory";
-import apiPropertyMatchesPropertyOptionality from "./apiPropertyMatchesPropertyOptionality/apiPropertyMatchesPropertyOptionality";
-import controllerDecoratedHasApiTags from "./controllerDecoratedHasApiTags/controllerDecoratedHasApiTags";
-import apiMethodsShouldSpecifyApiResponse from "./apiMethodsShouldSpecifyApiResponse/apiMethodsShouldSpecifyApiResponse";
-import apiEnumPropertyBestPractices from "./apiEnumPropertyBestPractices/apiEnumPropertyBestPractices";
-import apiPropertyReturningArrayShouldSetArray from "./apiPropertyReturningArrayShouldSetArray/apiPropertyReturningArrayShouldSetArray";
+import {apiPropertyMatchesPropertyOptionality} from "./apiPropertyMatchesPropertyOptionality/apiPropertyMatchesPropertyOptionality";
+import { controllerDecoratedHasApiTags } from "./controllerDecoratedHasApiTags/controllerDecoratedHasApiTags";
+import { apiMethodsShouldSpecifyApiResponse } from "./apiMethodsShouldSpecifyApiResponse/apiMethodsShouldSpecifyApiResponse";
+import { apiEnumPropertyBestPractices } from "./apiEnumPropertyBestPractices/apiEnumPropertyBestPractices";
+import { apiPropertyReturningArrayShouldSetArray } from "./apiPropertyReturningArrayShouldSetArray/apiPropertyReturningArrayShouldSetArray";
 import shouldSpecifyForbidUnknownValues from "./shouldSpecifyForbidUnknownValues/shouldSpecifyForbidUnknownValuesRule";
 import parameterDecoratorNameMatchesRouteParam from "./paramDecoratorNameMatchesRouteParam/paramDecoratorNameMatchesRouteParam";
 import validateNonPrimitiveNeedsDecorators from "./validate-non-primitves-needs-type-decorator/validateNonPrimitiveNeedsDecorators";
