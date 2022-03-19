@@ -1,71 +1,76 @@
-import {RuleTester} from "@typescript-eslint/experimental-utils/dist/eslint-utils";
-import {getFixturesRootDirectory} from "../../testing/fixtureSetup";
-import rule from "./apiPropertyMatchesPropertyOptionality";
+import { RuleTester } from '@typescript-eslint/experimental-utils/dist/eslint-utils';
+
+import { getFixturesRootDirectory } from '../../testing/fixtureSetup';
+import { apiPropertyMatchesPropertyOptionality } from './apiPropertyMatchesPropertyOptionality';
 
 const tsRootDirectory = getFixturesRootDirectory();
 const ruleTester = new RuleTester({
-    parser: "@typescript-eslint/parser",
-    parserOptions: {
-        ecmaVersion: 2015,
-        tsconfigRootDir: tsRootDirectory,
-        project: "./tsconfig.json",
-    },
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2015,
+    tsconfigRootDir: tsRootDirectory,
+    project: './tsconfig.json',
+  },
 });
 
-ruleTester.run("api-property-matches-property-optionality", rule, {
+ruleTester.run(
+  'api-property-matches-property-optionality',
+  apiPropertyMatchesPropertyOptionality,
+  {
     valid: [
-        {
-            code: `class TestClass {
+      {
+        code: `class TestClass {
                 @Expose()
                 @ApiPropertyOptional()
                 thisIsAStringProp?: string;}`,
-        },
-        {
-            code: `class TestClass {@Expose()
+      },
+      {
+        code: `class TestClass {@Expose()
                 @ApiPropertyOptional()
                 thisIsAStringProp: string | undefined;}`,
-        },
+      },
     ],
     invalid: [
-        {
-            code: `class TestClass {@Expose()
+      {
+        code: `class TestClass {@Expose()
                 @ApiPropertyOptional()
                 thisIsAStringProp: string;}`,
-            errors: [
-                {
-                    messageId: "shouldUseRequiredDecorator",
-                },
-            ],
-        },
-        {
-            code: `class TestClass {@Expose()
+        errors: [
+          {
+            messageId: 'shouldUseRequiredDecorator',
+          },
+        ],
+      },
+      {
+        code: `class TestClass {@Expose()
                 @ApiPropertyOptional()
                 thisIsAStringProp!: string;}`,
-            errors: [
-                {
-                    messageId: "shouldUseRequiredDecorator",
-                },
-            ],
-        },
-        {
-            code: `class TestClass {@Expose()
+        errors: [
+          {
+            messageId: 'shouldUseRequiredDecorator',
+          },
+        ],
+      },
+      {
+        code: `class TestClass {@Expose()
                 @ApiProperty()
                 thisIsAStringProp?: string;}`,
-            errors: [
-                {
-                    messageId: "shouldUseOptionalDecorator",
-                },
-            ],
-        },
-        {
-            code: `class TestClass {@Expose()
+        errors: [
+          {
+            messageId: 'shouldUseOptionalDecorator',
+          },
+        ],
+      },
+      {
+        code: `class TestClass {@Expose()
                 @ApiProperty()
                 thisIsAStringProp: string | undefined;}`,
-            errors: [
-                {
-                    messageId: "shouldUseOptionalDecorator",
-                },
-            ],
-        },
+        errors: [
+          {
+            messageId: 'shouldUseOptionalDecorator',
+          },
+        ],
+      },
     ],
-});
+  },
+);

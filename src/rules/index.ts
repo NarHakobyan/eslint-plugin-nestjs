@@ -9,7 +9,7 @@ import shouldSpecifyForbidUnknownValues from "./shouldSpecifyForbidUnknownValues
 import parameterDecoratorNameMatchesRouteParam from "./paramDecoratorNameMatchesRouteParam/paramDecoratorNameMatchesRouteParam";
 import validateNonPrimitiveNeedsDecorators from "./validate-non-primitves-needs-type-decorator/validateNonPrimitiveNeedsDecorators";
 import validateNestedOfArrayShouldSetEach from "./validateNestedOfArrayShouldSetEach/validateNestedOfArrayShouldSetEach";
-import allPropertiesAreWhitelisted from "./allPropertiesAreWhitelisted/allPropertiesAreWhitelisted";
+import { allPropertiesAreWhitelisted } from "./allPropertiesAreWhitelisted/allPropertiesAreWhitelisted";
 
 const allRules = {
     "api-property-matches-property-optionality":

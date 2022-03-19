@@ -1,43 +1,48 @@
-import {RuleTester} from "@typescript-eslint/experimental-utils/dist/eslint-utils";
-import {getFixturesRootDirectory} from "../../testing/fixtureSetup";
-import rule from "./controllerDecoratedHasApiTags";
+import { RuleTester } from '@typescript-eslint/experimental-utils/dist/eslint-utils';
+
+import { getFixturesRootDirectory } from '../../testing/fixtureSetup';
+import { controllerDecoratedHasApiTags } from './controllerDecoratedHasApiTags';
 
 const tsRootDirectory = getFixturesRootDirectory();
 const ruleTester = new RuleTester({
-    parser: "@typescript-eslint/parser",
-    parserOptions: {
-        ecmaVersion: 2015,
-        tsconfigRootDir: tsRootDirectory,
-        project: "./tsconfig.json",
-    },
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2015,
+    tsconfigRootDir: tsRootDirectory,
+    project: './tsconfig.json',
+  },
 });
 
-ruleTester.run("controllers-should-supply-api-tags", rule, {
+ruleTester.run(
+  'controllers-should-supply-api-tags',
+  controllerDecoratedHasApiTags,
+  {
     valid: [
-        {
-            code: `
+      {
+        code: `
             @ApiTags("my-tag")
             @Controller("my-controller")
             class TestClass {
           }`,
-        },
-        {
-            code: `
+      },
+      {
+        code: `
             class TestClass {
           }`,
-        },
+      },
     ],
     invalid: [
-        {
-            code: `
+      {
+        code: `
             @Controller("my-controller")
             class TestClass {
           }`,
-            errors: [
-                {
-                    messageId: "shouldUseApiTagDecorator",
-                },
-            ],
-        },
+        errors: [
+          {
+            messageId: 'shouldUseApiTagDecorator',
+          },
+        ],
+      },
     ],
-});
+  },
+);

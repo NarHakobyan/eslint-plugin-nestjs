@@ -1,37 +1,38 @@
-import {RuleTester} from "@typescript-eslint/experimental-utils/dist/eslint-utils";
-import rule from "./allPropertiesAreWhitelisted";
+import { RuleTester } from '@typescript-eslint/experimental-utils/dist/eslint-utils';
+
+import { allPropertiesAreWhitelisted } from './allPropertiesAreWhitelisted';
 
 const ruleTester = new RuleTester({
-    parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
 });
 
-ruleTester.run("all-properties-are-whitelisted", rule, {
-    valid: [
-        {
-            code: `
+ruleTester.run('all-properties-are-whitelisted', allPropertiesAreWhitelisted, {
+  valid: [
+    {
+      code: `
 class A {
   @A
   b: string
 }
         `,
-        },
-        {
-            code: `
+    },
+    {
+      code: `
 class A {
   @A()
   b: string
 }
         `,
-        },
-        {
-            code: `
+    },
+    {
+      code: `
 class A {
   b: string
 }
     `,
-        },
-        {
-            code: `
+    },
+    {
+      code: `
 class A {
   @IsString()
   b: string
@@ -40,11 +41,11 @@ class A {
   b: string
 }
     `,
-        },
-    ],
-    invalid: [
-        {
-            code: `
+    },
+  ],
+  invalid: [
+    {
+      code: `
 class A {
   @Allow()
   b: string
@@ -52,11 +53,11 @@ class A {
   b: string
 }
     `,
-            errors: [
-                {
-                    messageId: "missing-property-decorator",
-                },
-            ],
+      errors: [
+        {
+          messageId: 'missing-property-decorator',
         },
-    ],
+      ],
+    },
+  ],
 });

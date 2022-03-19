@@ -1,9 +1,7 @@
 import rules from "./rules";
 import configs from "./configs";
 
-const configuration = {
+export = {
     rules,
     configs,
 };
-
-export = configuration;

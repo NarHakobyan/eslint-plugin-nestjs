@@ -1,21 +1,25 @@
-import {RuleTester} from "@typescript-eslint/experimental-utils/dist/eslint-utils";
-import {getFixturesRootDirectory} from "../../testing/fixtureSetup";
-import rule from "./apiEnumPropertyBestPractices";
+import { RuleTester } from '@typescript-eslint/experimental-utils/dist/eslint-utils';
+
+import { getFixturesRootDirectory } from '../../testing/fixtureSetup';
+import { apiEnumPropertyBestPractices } from './apiEnumPropertyBestPractices';
 
 const tsRootDirectory = getFixturesRootDirectory();
 const ruleTester = new RuleTester({
-    parser: "@typescript-eslint/parser",
-    parserOptions: {
-        ecmaVersion: 2015,
-        tsconfigRootDir: tsRootDirectory,
-        project: "./tsconfig.json",
-    },
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2015,
+    tsconfigRootDir: tsRootDirectory,
+    project: './tsconfig.json',
+  },
 });
 
-ruleTester.run("api-enum-property-best-practices", rule, {
+ruleTester.run(
+  'api-enum-property-best-practices',
+  apiEnumPropertyBestPractices,
+  {
     valid: [
-        {
-            code: `enum MyEnum{
+      {
+        code: `enum MyEnum{
                 ValA,
                 ValB
             }
@@ -27,9 +31,9 @@ ruleTester.run("api-enum-property-best-practices", rule, {
                 })
                 public myProperty!:MyEnum
             }`,
-        },
-        {
-            code: `enum MyEnum{
+      },
+      {
+        code: `enum MyEnum{
                 ValA,
                 ValB
             }
@@ -38,11 +42,11 @@ ruleTester.run("api-enum-property-best-practices", rule, {
                 @ApiProperty()
                 public myProperty!:Object
             }`,
-        },
+      },
     ],
     invalid: [
-        {
-            code: `enum MyEnum{
+      {
+        code: `enum MyEnum{
                 ValA,
                 ValB
             }
@@ -54,15 +58,15 @@ ruleTester.run("api-enum-property-best-practices", rule, {
                 })
                 public myProperty!:MyEnum
             }`,
-            errors: [
-                {
-                    messageId: "needsEnumNameAdded",
-                },
-                {messageId: "needsTypeRemoved"},
-            ],
-        },
-        {
-            code: `enum MyEnum{
+        errors: [
+          {
+            messageId: 'needsEnumNameAdded',
+          },
+          { messageId: 'needsTypeRemoved' },
+        ],
+      },
+      {
+        code: `enum MyEnum{
                 ValA,
                 ValB
             }
@@ -71,14 +75,14 @@ ruleTester.run("api-enum-property-best-practices", rule, {
                 @ApiProperty({})
                 public myProperty!:MyEnum
             }`,
-            errors: [
-                {
-                    messageId: "needsEnumNameAdded",
-                },
-            ],
-        },
-        {
-            code: `enum MyEnum{
+        errors: [
+          {
+            messageId: 'needsEnumNameAdded',
+          },
+        ],
+      },
+      {
+        code: `enum MyEnum{
                 ValA,
                 ValB
             }
@@ -88,10 +92,10 @@ ruleTester.run("api-enum-property-best-practices", rule, {
                     enum: MyEnum,})
                 public myProperty!:MyEnum
             }`,
-            errors: [{messageId: "enumNameShouldMatchType"}],
-        },
-        {
-            code: `enum MyEnum{
+        errors: [{ messageId: 'enumNameShouldMatchType' }],
+      },
+      {
+        code: `enum MyEnum{
                 ValA,
                 ValB
             }
@@ -102,14 +106,14 @@ ruleTester.run("api-enum-property-best-practices", rule, {
                 })
                 public myProperty!:MyEnum
             }`,
-            errors: [
-                {
-                    messageId: "needsEnumNameAdded",
-                },
-            ],
-        },
-        {
-            code: `enum MyEnum{
+        errors: [
+          {
+            messageId: 'needsEnumNameAdded',
+          },
+        ],
+      },
+      {
+        code: `enum MyEnum{
                 ValA,
                 ValB
             }
@@ -120,14 +124,15 @@ ruleTester.run("api-enum-property-best-practices", rule, {
                 })
                 public myProperty!:MyEnum
             }`,
-            errors: [
-                {
-                    messageId: "needsEnumNameAdded",
-                },
-                {
-                    messageId: "needsTypeRemoved",
-                },
-            ],
-        },
+        errors: [
+          {
+            messageId: 'needsEnumNameAdded',
+          },
+          {
+            messageId: 'needsTypeRemoved',
+          },
+        ],
+      },
     ],
-});
+  },
+);

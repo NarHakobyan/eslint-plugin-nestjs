@@ -1,76 +1,72 @@
-// Import { getParserServices } from "@typescript-eslint/experimental-utils/dist/eslint-utils";
-// import * as tsutils from "tsutils";
-// import { getParserServices } from "@typescript-eslint/experimental-utils/dist/eslint-utils";
-import {TSESTree} from "@typescript-eslint/types";
-import {createRule} from "../../utils/createRule";
-import {typedTokenHelpers} from "../../utils/typedTokenHelpers";
+import type { TSESTree } from '@typescript-eslint/types';
+
+import { createRule } from '../../utils/createRule';
+import { typedTokenHelpers } from '../../utils/typedTokenHelpers';
 
 export const shouldUseRequiredDecorator = (
-    node: TSESTree.PropertyDefinition
+  node: TSESTree.PropertyDefinition,
 ): boolean => {
-    const hasOptionalDecorator = typedTokenHelpers.nodeHasDecoratorsNamed(
-        node,
-        ["ApiPropertyOptional"]
-    );
+  const hasOptionalDecorator = typedTokenHelpers.nodeHasDecoratorsNamed(node, [
+    'ApiPropertyOptional',
+  ]);
 
-    const isOptionalPropertyValue =
-        typedTokenHelpers.isOptionalPropertyValue(node);
+  const isOptionalPropertyValue =
+    typedTokenHelpers.isOptionalPropertyValue(node);
 
-    return hasOptionalDecorator && !isOptionalPropertyValue;
+  return hasOptionalDecorator && !isOptionalPropertyValue;
 };
 
 export const shouldUseOptionalDecorator = (
-    node: TSESTree.PropertyDefinition
+  node: TSESTree.PropertyDefinition,
 ): boolean => {
-    const hasRequiredDecorator = typedTokenHelpers.nodeHasDecoratorsNamed(
-        node,
-        ["ApiProperty"]
-    );
+  const hasRequiredDecorator = typedTokenHelpers.nodeHasDecoratorsNamed(node, [
+    'ApiProperty',
+  ]);
 
-    const isOptionalPropertyValue =
-        typedTokenHelpers.isOptionalPropertyValue(node);
+  const isOptionalPropertyValue =
+    typedTokenHelpers.isOptionalPropertyValue(node);
 
-    return hasRequiredDecorator && isOptionalPropertyValue;
+  return hasRequiredDecorator && isOptionalPropertyValue;
 };
 
-const rule = createRule({
-    name: "api-property-matches-property-optionality",
-    meta: {
-        docs: {
-            description:
-                "Properties should have correct @ApiProperty decorators",
-            recommended: false,
-            requiresTypeChecking: false,
-        },
-        messages: {
-            shouldUseOptionalDecorator: `Property marked as optional should use @ApiPropertyOptional decorator`,
-            shouldUseRequiredDecorator: `Property marked as required should use @ApiProperty decorator`,
-        },
-        schema: [],
-        hasSuggestions: false,
-        type: "suggestion",
+export const apiPropertyMatchesPropertyOptionality = createRule({
+  name: 'api-property-matches-property-optionality',
+  meta: {
+    docs: {
+      description: 'Properties should have correct @ApiProperty decorators',
+      recommended: false,
+      requiresTypeChecking: false,
     },
-    defaultOptions: [],
+    messages: {
+      shouldUseOptionalDecorator:
+        'Property marked as optional should use @ApiPropertyOptional decorator',
+      shouldUseRequiredDecorator:
+        'Property marked as required should use @ApiProperty decorator',
+    },
+    schema: [],
+    hasSuggestions: false,
+    type: 'suggestion',
+  },
+  defaultOptions: [],
 
-    create(context) {
-        return {
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            PropertyDefinition(node: TSESTree.PropertyDefinition): void {
-                if (shouldUseOptionalDecorator(node)) {
-                    context.report({
-                        node: node,
-                        messageId: "shouldUseOptionalDecorator",
-                    });
-                }
-                if (shouldUseRequiredDecorator(node)) {
-                    context.report({
-                        node: node,
-                        messageId: "shouldUseRequiredDecorator",
-                    });
-                }
-            },
-        };
-    },
+  create(context) {
+    return {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      PropertyDefinition(node: TSESTree.PropertyDefinition): void {
+        if (shouldUseOptionalDecorator(node)) {
+          context.report({
+            node,
+            messageId: 'shouldUseOptionalDecorator',
+          });
+        }
+
+        if (shouldUseRequiredDecorator(node)) {
+          context.report({
+            node,
+            messageId: 'shouldUseRequiredDecorator',
+          });
+        }
+      },
+    };
+  },
 });
-
-export default rule;
