@@ -14,6 +14,9 @@
         "release": "npx semantic-release",
         "semantic-release": "semantic-release"
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "release": {
         "branches": [
             "main"
