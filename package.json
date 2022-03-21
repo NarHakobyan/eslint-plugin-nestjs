@@ -1,6 +1,6 @@
 {
     "name": "@moneteam/eslint-plugin-nestjs",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Eslint rules for nestjs projects",
     "scripts": {
         "clean": "rm -Rf ./dist/",

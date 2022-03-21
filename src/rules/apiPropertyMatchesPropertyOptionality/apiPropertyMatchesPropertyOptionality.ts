@@ -8,6 +8,9 @@ export const shouldUseRequiredDecorator = (
 ): boolean => {
   const hasOptionalDecorator = typedTokenHelpers.nodeHasDecoratorsNamed(node, [
     'ApiPropertyOptional',
+    'ApiBooleanPropertyOptional',
+    'ApiUUIDPropertyOptional',
+    'ApiEnumPropertyOptional',
   ]);
 
   const isOptionalPropertyValue =
@@ -21,6 +24,9 @@ export const shouldUseOptionalDecorator = (
 ): boolean => {
   const hasRequiredDecorator = typedTokenHelpers.nodeHasDecoratorsNamed(node, [
     'ApiProperty',
+    'ApiBooleanProperty',
+    'ApiUUIDProperty',
+    'ApiEnumProperty',
   ]);
 
   const isOptionalPropertyValue =
