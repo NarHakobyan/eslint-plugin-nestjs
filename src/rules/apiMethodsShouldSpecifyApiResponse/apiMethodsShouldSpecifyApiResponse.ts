@@ -22,6 +22,7 @@ export const shouldUseApiResponseDecorator = (
     [
       'ApiResponse',
       'ApiOkResponse',
+      'ApiPageOkResponse',
       'ApiCreatedResponse',
       'ApiAcceptedResponse',
       'ApiNoContentResponse',
