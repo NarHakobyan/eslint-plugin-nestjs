@@ -4,7 +4,7 @@ import { apiMethodsShouldSpecifyApiResponse } from './apiMethodsShouldSpecifyApi
 import { apiPropertyMatchesPropertyOptionality } from './apiPropertyMatchesPropertyOptionality/apiPropertyMatchesPropertyOptionality';
 import { apiPropertyReturningArrayShouldSetArray } from './apiPropertyReturningArrayShouldSetArray/apiPropertyReturningArrayShouldSetArray';
 import { controllerDecoratedHasApiTags } from './controllerDecoratedHasApiTags/controllerDecoratedHasApiTags';
-import injectableShouldBeProvided from './injectablesShouldBeProvided/injectableShouldBeProvided';
+import { injectableShouldBeProvided } from './injectablesShouldBeProvided/injectableShouldBeProvided';
 import parameterDecoratorNameMatchesRouteParam from './paramDecoratorNameMatchesRouteParam/paramDecoratorNameMatchesRouteParam';
 import providedInjectedShouldMatchFactoryParameters from './providerInjectedShouldMatchFactory/ProviderInjectedShouldMatchFactory';
 import shouldSpecifyForbidUnknownValues from './shouldSpecifyForbidUnknownValues/shouldSpecifyForbidUnknownValuesRule';

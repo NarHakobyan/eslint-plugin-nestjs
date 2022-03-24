@@ -80,7 +80,7 @@ function initialiseModuleMappings(
   );
 }
 
-const rule = createRule({
+export const injectableShouldBeProvided = createRule({
   name: 'injectable-should-be-provided',
   meta: {
     docs: {
@@ -175,5 +175,3 @@ const rule = createRule({
     };
   },
 });
-
-export default rule;
